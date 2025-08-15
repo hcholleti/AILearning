@@ -1,5 +1,7 @@
 requests
 pandas
 openpyxl
-schedule
 python-dotenv
+schedule
+beautifulsoup4
+lxml
