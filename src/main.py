@@ -25,7 +25,7 @@ def save_seen_ids(path: str, ids):
 def main():
     rapidapi_key = os.getenv("RAPIDAPI_KEY")
     fetcher = JobFetcher(rapidapi_key)
-    jobs = fetcher.fetch_jsearch(keywords="data scientist", location="India", posted_within_days=7)
+    jobs = fetcher.fetch_jsearch(keywords="DevOps Engineer", location="USA", posted_within_days=3)
 
     seen_path = os.path.join(os.path.dirname(__file__), "../outputs", "seen_jobs.csv")
     os.makedirs(os.path.dirname(seen_path), exist_ok=True)
@@ -33,7 +33,7 @@ def main():
 
     jf = JobFilter(jobs)
     new_jobs = jf.deduplicate(seen_ids)
-    new_jobs = JobFilter(new_jobs).filter_by_keywords(["data scientist"])
+    new_jobs = JobFilter(new_jobs).filter_by_keywords(["devops", "engineer"])
 
     if not new_jobs:
         print("No new jobs to report.")
