@@ -46,7 +46,7 @@ AI Job Tracker is a modern, full-stack application that revolutionizes job searc
 ## 📁 Project Structure
 
 ```
-AILearning/
+ai-job-tracker/
 ├── 📁 src/                           # Backend source code
 │   ├── 📁 api/                       # FastAPI application
 │   │   ├── main.py                   # API endpoints & server
@@ -135,21 +135,45 @@ AILearning/
 
 ## 🚀 Quick Start
 
+### Option 1: Automated Setup (Recommended)
+```bash
+git clone https://github.com/hcholleti/ai-job-tracker.git
+cd ai-job-tracker
+
+# For Linux/macOS:
+./setup.sh
+
+# For Windows:
+setup.bat
+```
+
+### Option 2: Manual Setup
+
 ### Prerequisites
-- Python 3.11+ 
-- Node.js 18+ (for frontend)
-- Git
+- **Python 3.11+** with pip
+- **Node.js 18+** with npm (for frontend)
+- **Git** for cloning the repository
+- **Internet connection** for downloading models and dependencies
+
+**Note**: The system will automatically download the required spaCy language model during setup.
 
 ### 1. Clone Repository
 ```bash
-git clone https://github.com/hcholleti/AILearning.git
-cd AILearning
+git clone https://github.com/hcholleti/ai-job-tracker.git
+cd ai-job-tracker
 ```
 
 ### 2. Backend Setup
 ```bash
+# Create virtual environment (recommended)
+python -m venv .venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+
+# Install dependencies
 cd src
 pip install -r requirements.txt
+
+# Install required spaCy model
 python -m spacy download en_core_web_sm
 ```
 
@@ -181,6 +205,12 @@ npm run dev
 
 ### 6. Test the System
 ```bash
+# Validate setup first
+cd src && python validate_setup.py
+
+# Quick smoke test (run this first to verify setup)
+cd src && python test_complete_system.py
+
 # CLI interface
 cd src && python main.py
 
@@ -265,6 +295,14 @@ open http://localhost:3000
 
 ## 🧪 Testing
 
+### Quick Verification
+```bash
+# Run comprehensive smoke test
+cd src
+python test_complete_system.py
+```
+**Expected Output**: All 5 tests should pass (✅), confirming the system is ready.
+
 ### Run All Tests
 ```bash
 cd src
@@ -295,6 +333,56 @@ python -m uvicorn api.main:app --port 8001
 curl http://localhost:8001/health
 curl http://localhost:8001/docs  # Interactive documentation
 ```
+
+## 🔧 Troubleshooting
+
+### Common Issues
+
+#### ❌ **"Can't find model 'en_core_web_sm'"**
+```bash
+# Install the required spaCy model
+python -m spacy download en_core_web_sm
+```
+
+#### ❌ **API Server Won't Start**
+```bash
+# Check if port 8001 is in use
+lsof -i :8001
+
+# Kill existing process if needed
+pkill -f "uvicorn"
+
+# Restart server
+cd src && python -m uvicorn api.main:app --reload --port 8001
+```
+
+#### ❌ **Module Import Errors**
+```bash
+# Ensure you're in the correct directory and virtual environment
+cd ai-job-tracker/src
+pip install -r requirements.txt
+```
+
+#### ❌ **Frontend Won't Start**
+```bash
+cd frontend
+rm -rf node_modules package-lock.json
+npm install
+npm run dev
+```
+
+#### ⚠️ **Azure Storage Errors (Optional)**
+The system works with local storage if Azure credentials are not provided. For Azure setup, ensure your `.env` file has:
+```bash
+AZURE_STORAGE_CONNECTION_STRING=your_connection_string
+AZURE_STORAGE_CONTAINER=jobtracker
+```
+
+### Verification Steps
+1. **Backend Health**: Visit `http://localhost:8001/health` (should return status: healthy)
+2. **API Documentation**: Visit `http://localhost:8001/docs` (interactive API docs)
+3. **Frontend**: Visit `http://localhost:3000` (React application)
+4. **Smoke Test**: Run `python test_complete_system.py` (all 5 tests should pass)
 
 ## 🌐 Deployment
 

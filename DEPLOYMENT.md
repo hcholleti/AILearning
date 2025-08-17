@@ -26,6 +26,11 @@
 
 ### 1. Clone and Setup Backend
 ```bash
+# Clone repository
+git clone https://github.com/hcholleti/ai-job-tracker.git
+cd ai-job-tracker
+
+# Setup backend
 cd src
 pip install -r requirements.txt
 python -m spacy download en_core_web_sm
