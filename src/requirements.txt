@@ -5,3 +5,13 @@ python-dotenv
 schedule
 beautifulsoup4
 lxml
+spacy
+pdfplumber
+python-docx
+sentence-transformers
+scikit-learn
+fastapi
+uvicorn[standard]
+azure-storage-blob
+azure-identity
+python-multipart
