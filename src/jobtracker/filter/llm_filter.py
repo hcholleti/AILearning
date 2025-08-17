@@ -1,5 +1,6 @@
 # LLM-based job filtering (stub, can use OpenAI or HuggingFace)
 def filter_jobs(jobs, user_prompt, llm=None):
+    print(f"Filtering jobs with prompt: {user_prompt}")
     # For now, simple keyword filter. Replace with LLM call as needed.
     prompt = user_prompt.lower()
     filtered = []
